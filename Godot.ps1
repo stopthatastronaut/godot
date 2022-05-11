@@ -1,15 +1,4 @@
-Function Load-Config
-{
-    return [pscustomobject]@{
-        HookUrl = $env:godothookurl
-    }
-}
 
-Function Initialize-Config
-{
-    $url = Read-host "Please enter your incoming webhook URL from Slack"
-    @{ HookUrl = $url } | ConvertTo-Json | out-file .\.creds.json 
-}
 
 Function Wait-ForGodot
 {
@@ -19,7 +8,7 @@ Function Wait-ForGodot
         [switch]$TestMode
     )
 
-    $filelines = gc .\text\act1.txt
+    $filelines = gc .\text\act1.txt 
 
 
     $filelines | % {
@@ -47,7 +36,7 @@ Function Invoke-SlackMessage
         [string] $col 
     )
     $config = Load-Config
-    $slackUri = $config.hookurl
+    $slackUri = $env:godothookurl
 
     if(!$fallback)
     {
