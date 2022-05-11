@@ -1,6 +1,8 @@
 Function Load-Config
 {
-    return gc .\.creds.json | convertfrom-json 
+    return [pscustomobject]@{
+        HookUrl = $env:godothookurl
+    }
 }
 
 Function Initialize-Config
